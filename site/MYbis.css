@@ -1,5 +1,5 @@
 body{
-	background : url( background.png ) no-repeat;
+	background : url( fond.jpg ) no-repeat;
 	background-size: cover;
 	background-attachment: fixed; 
 	text-align : justify;
@@ -9,7 +9,7 @@ body{
     width: 900px;
     margin: auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
 }
 
