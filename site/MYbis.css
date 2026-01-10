@@ -1,0 +1,127 @@
+body{
+	background : url( JDR.jpg ) no-repeat;
+	background-size: cover;
+	background-attachment: fixed; 
+	text-align : justify;
+}
+
+#bloc_page
+{
+    width: 900px;
+    margin: auto;
+    padding: 10px;
+    background-color : white;
+    overflow : auto
+}
+
+h1{
+	
+	border-color: 9b735f;
+	border-style: groove;
+}
+	 
+h3{
+    margin: 10px 0;
+    color: #000000;
+    text-shadow: 0 1px 0 #FFFFFF;
+    font-weight: normal;
+    font-size: 71px;
+}
+
+h4{
+    margin: 10px 0;
+    color: #000000;
+    text-shadow: 0 1px 0 #FFFFFF;
+    font-weight: normal;
+    font-size: 71px;
+    text-align : center
+}
+
+.zozo {
+padding-left:40px;
+padding-top: 20px;
+height: 85px;
+background: color: #9b735f;
+font-size: 30px;
+text-align: center;
+}
+
+img {
+margin : 0px 0px 0px 0px;
+}
+
+
+.affichage{
+	border: 1px solid #9b735f;
+	border-width: medium;
+	text-align: center;
+	width: 350px;
+	height: 50px;
+	margin-top:  50px;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	padding-top: 20px;
+	font-size: 33px;
+	color : #000000;
+	background-color: #9b735f
+}
+
+.lien {
+	color: #9b735f
+}
+
+.mini{
+	font-size: 15px;
+	text-align: right;
+}
+
+.open{
+	font-size: 20px;
+	text-align: center;
+}
+
+.para{
+	font-size: 20px;
+}
+
+.big{
+	font-size: 24px;
+}
+.stitre{
+	font-size: 25px;
+}
+
+a {
+  color: #9b735f;
+}
+
+input[type=radio]#Brown {
+            accent-color: #9b735f;
+}
+
+input[type=text]:focus {
+  background-color: #BBA08E;
+}
+
+.button {
+  background-color: light grey;
+  padding: 7px 14px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.button:hover {
+      background-color: #9b735f ;
+      transition : 0.3s ;
+  }
+
+#console {
+            border: 1px solid #000;
+            padding: 10px;
+            width: 80%;
+            height: 300px;
+            overflow-y: scroll;
+            margin: 20px auto;
+            background-color: #BBA08E;
+        }
