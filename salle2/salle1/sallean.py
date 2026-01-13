@@ -40,23 +40,26 @@ class Joueur1:
         self.y = max(100, min(self.y, size[1]-100))
         
         player_rect = pygame.Rect(self.x, self.y, 100, 100)
-        
-        if touches[pygame.K_e]:
-            if player_rect.colliderect(buttons[5].rect):
-                return 1
-            if player_rect.colliderect(buttons[6].rect):
-                return 2
-            if player_rect.colliderect(buttons[7].rect):
-                return 3
-            if player_rect.colliderect(buttons[8].rect):
-                return 4
-                
 
         for obstacle in obstacles:
             if player_rect.colliderect(obstacle.rect):
                 self.x = old_x
                 self.y = old_y
-                break        
+                break       
+    
+    def quel_bouton(self, touches):
+        player_rect = pygame.Rect(self.x, self.y, 100, 100)
+        if touches[pygame.K_r]:
+            if player_rect.colliderect(buttons[5].rect):
+                return "1"
+            if player_rect.colliderect(buttons[6].rect):
+                return "2"
+            if player_rect.colliderect(buttons[7].rect):
+                return "3"
+            if player_rect.colliderect(buttons[8].rect):
+                return "4"
+        return None
+
 
 jouer1 = Joueur1(300, 700)
 
@@ -90,22 +93,27 @@ class Joueur2:
         player_rect = pygame.Rect(self.x, self.y, 100, 100)
         
         if touches[pygame.K_e]:
-            if player_rect.colliderect(buttons[0].rect) and len(obstacles) > 3:
+            if player_rect.colliderect(buttons[0].rect) and len(obstacles) == 5:
                 obstacles.remove(obstacles[3])
-            if player_rect.colliderect(buttons[1].rect):
-                return 1
-            if player_rect.colliderect(buttons[2].rect):
-                return 2
-            if player_rect.colliderect(buttons[3].rect):
-                return 3
-            if player_rect.colliderect(buttons[4].rect):
-                return 4
                 
         for obstacle in obstacles:
             if player_rect.colliderect(obstacle.rect):
                 self.x = old_x
                 self.y = old_y
                 break
+    
+    def quel_bouton(self, touches):
+        player_rect = pygame.Rect(self.x, self.y, 100, 100)
+        if touches[pygame.K_e]:
+            if player_rect.colliderect(buttons[1].rect):
+                return "1"
+            if player_rect.colliderect(buttons[2].rect):
+                return "2"
+            if player_rect.colliderect(buttons[3].rect):
+                return "3"
+            if player_rect.colliderect(buttons[4].rect):
+                return "4"
+        return None
 
 jouer2 = Joueur2(300, 400)
 
@@ -121,6 +129,7 @@ obstacles = [
     Obstacle(300, 600, 200, 50),
     Obstacle(300, 900, 200, 50),
     Obstacle(500, 600, 50, 350),
+    Obstacle(1000, 100, 50, 950),
 ]
 
 class bouton:
@@ -176,22 +185,27 @@ while running:
     for button in buttons:
         button.draw(screen)
 
-    if obstacles[3] != Obstacle(500, 600, 50, 350):
+    if len(obstacles) == 4:
         texte_reussi = pygame.font.Font(None, 34).render("code : 42", True, (255, 255, 255))
         rect = texte_reussi.get_rect(center=(600, 400)) 
         screen.blit(texte_reussi, rect)
     
-    if jouer1.move(touches, obstacles) == jouer2.move(touches, obstacles) == 4:
-        sequence.append(4)
+    if len(sequence) < 2:
+        b1 = jouer1.quel_bouton(touches)
+        b2 = jouer2.quel_bouton(touches)
+        if b1 is not None:
+            sequence.append(int(b1))
+            print("Joueur 1 a appuyé sur le bouton :", b1)
+        if b2 is not None:
+            sequence.append(int(b2))
+            print("Joueur 2 a appuyé sur le bouton :", b2)
+    elif sequence == gsequence:
+        obstacles.pop()
+        sequence = []
+    else:
+        sequence = []
     
-    if jouer1.move(touches, obstacles) == jouer2.move(touches, obstacles) == 2:
-        sequence.append(2)
     
-    if sequence == gsequence:
-        texte_reussi = pygame.font.Font(None, 50).render("Puzzle réussi !", True, (255, 255, 255))
-        rect = texte_reussi.get_rect(center=(size[0]//2, size[1]//2)) 
-        screen.blit(texte_reussi, rect)
-
 
     jouer1.draw(screen)
     jouer2.draw(screen)
