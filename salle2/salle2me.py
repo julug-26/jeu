@@ -10,7 +10,7 @@ instructions_j2 = "Joueur 2: R pour interagir"
 
 
 #sizes = pygame.display.get_desktop_sizes()
-size = (800, 600)
+size = (1920, 1080)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Salle 2 - Le puzzle des statues")
 fond = pygame.transform.scale(fond, size)
@@ -31,8 +31,8 @@ personnage2_color = (255, 100, 100)
 personnage1_speed = 2
 personnage2_speed = 2
 #mur
-mur_j1 = pygame.Rect(0, 0, 60, size[1]) #mur gauche
-mur_j2 = pygame.Rect(size[0]-60, 0, 60, size[1]) #mur droit
+mur_j1 = pygame.Rect(90, 90, 60, size[1]) #mur gauche
+mur_j2 = pygame.Rect(size[0]-90, 0, 60, size[1]) #mur droit
 
 # Texte mur
 texte_mur_j1 = [
@@ -52,7 +52,7 @@ statue_size = (50, 50)
 
 # Centre de la salle
 cx, cy = size[0]//2, size[1]//2
-r = 100  # rayon pour espacer les statues
+r = 200  # rayon pour espacer les statues
 
 # Création des 4 statues autour du centre
 statues = [
@@ -69,8 +69,8 @@ ordre_correct = ["Racine", "Soleil", "Lune"]
 activations = []
 
 # Positions de départ
-depart_j1 = [100, 100]
-depart_j2 = [300, 100]
+depart_j1 = [size[0]//2 - 200, size[1] - 200]
+depart_j2 = [size[0]//2 + 150, size[1] - 200]
 
 personnage1_pos = depart_j1.copy()
 personnage2_pos = depart_j2.copy()
@@ -119,12 +119,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
+            if event.type == pygame.K_ESCAPE:
+                running = False
             if statues1 and statues2:
                 # Joueur 1 interagit avec E
                 if event.key == pygame.K_e:
                     for s in statues:
                         if est_sur_statue(personnage1_pos, personnage1_size, s["pos"], statue_size):
-                            prinssst(f"Joueur 1 a activé {s['nom']} !")
+                            print(f"Joueur 1 a activé {s['nom']} !")
                             activations.append(s["nom"])
                             # Vérification
                             if activations[-1] != ordre_correct[len(activations)-1]:
