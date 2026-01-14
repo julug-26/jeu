@@ -149,15 +149,15 @@ class bouton:
     
     
 buttons = [
-    bouton(500, 450, 70, 70, "E", "b"),
-    bouton(650, 350, 70, 70, "1", "b"),
-    bouton(650, 450, 70, 70, "2", "b"),
-    bouton(750, 350, 70, 70, "3", "b"),
-    bouton(750, 450, 70, 70, "4", "b"),
-    bouton(650, 700, 70, 70, "1", "b"),
-    bouton(650, 800, 70, 70, "2", "b"),
-    bouton(750, 700, 70, 70, "3", "b"),
-    bouton(750, 800, 70, 70, "4", "b"),  
+    bouton(500, 450, 100, 70, "E", "b"),
+    bouton(650, 350, 100, 70, "1", "b"),
+    bouton(650, 450, 100, 70, "2", "b"),
+    bouton(760, 350, 100, 70, "3", "b"),
+    bouton(760, 450, 100, 70, "4", "b"),
+    bouton(650, 700, 100, 70, "1", "b"),
+    bouton(650, 800, 100, 70, "2", "b"),
+    bouton(760, 700, 100, 70, "3", "b"),
+    bouton(760, 800, 100, 70, "4", "b"),  
 ]
 
 sequence = []
@@ -200,6 +200,8 @@ while running:
             sequence.append(int(b1))
             print("Joueur 1 et 2 a appuyé sur le bouton :", b1)
             print("Séquence actuelle :", sequence)
+            buttons[int(b1)].color = (100, 255, 100)
+            buttons[int(b1)+4].color = (100, 255, 100)
 
     elif sequence == gsequence:
         obstacles.pop()
