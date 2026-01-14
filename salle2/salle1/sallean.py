@@ -125,17 +125,20 @@ class Obstacle:
         pygame.draw.rect(screen, (200, 50, 50), self.rect)
 
 obstacles = [
-    Obstacle(300, 300, 200, 50),
-    Obstacle(300, 600, 200, 50),
-    Obstacle(300, 900, 200, 50),
+    Obstacle(300, 300, 600, 50),
+    Obstacle(300, 600, 600, 50),
+    Obstacle(300, 900, 600, 50),
     Obstacle(500, 600, 50, 350),
-    Obstacle(1000, 100, 50, 950),
+    Obstacle(900, 100, 50, 950),
 ]
 
 class bouton:
-    def __init__(self, x, y, width, height, texte="E"):
+    def __init__(self, x, y, width, height, texte="E", type="b"):
         self.rect = pygame.Rect(x, y, width, height)
-        self.color = (50, 50, 200)
+        if type == "b":
+            self.color = (50, 50, 200)
+        else:
+            self.color = (200, 50, 50)
         self.texte = texte
         self.font = pygame.font.Font(None, 34)
     
@@ -146,15 +149,15 @@ class bouton:
     
     
 buttons = [
-    bouton(500, 450, 70, 70, "E"),
-    bouton(620, 450, 70, 70, "1"),
-    bouton(620, 500, 70, 70, "2"),
-    bouton(700, 450, 70, 70, "3"),
-    bouton(700, 500, 70, 70, "4"),
-    bouton(620, 700, 70, 70, "1"),
-    bouton(620, 750, 70, 70, "2"),
-    bouton(700, 700, 70, 70, "3"),
-    bouton(700, 750, 70, 70, "4"),  
+    bouton(500, 450, 70, 70, "E", "b"),
+    bouton(650, 350, 70, 70, "1", "b"),
+    bouton(650, 450, 70, 70, "2", "b"),
+    bouton(750, 350, 70, 70, "3", "b"),
+    bouton(750, 450, 70, 70, "4", "b"),
+    bouton(650, 700, 70, 70, "1", "b"),
+    bouton(650, 800, 70, 70, "2", "b"),
+    bouton(750, 700, 70, 70, "3", "b"),
+    bouton(750, 800, 70, 70, "4", "b"),  
 ]
 
 sequence = []
@@ -186,26 +189,24 @@ while running:
         button.draw(screen)
 
     if len(obstacles) == 4:
-        texte_reussi = pygame.font.Font(None, 34).render("code : 42", True, (255, 255, 255))
+        texte_reussi = pygame.font.Font(None, 34).render("code simultané: 4422", True, (255, 255, 255))
         rect = texte_reussi.get_rect(center=(600, 400)) 
         screen.blit(texte_reussi, rect)
     
     if len(sequence) < 2:
         b1 = jouer1.quel_bouton(touches)
         b2 = jouer2.quel_bouton(touches)
-        if b1 is not None:
+        if b1 is not None and b1 == b2:
             sequence.append(int(b1))
-            print("Joueur 1 a appuyé sur le bouton :", b1)
-        if b2 is not None:
-            sequence.append(int(b2))
-            print("Joueur 2 a appuyé sur le bouton :", b2)
+            print("Joueur 1 et 2 a appuyé sur le bouton :", b1)
+            print("Séquence actuelle :", sequence)
+
     elif sequence == gsequence:
         obstacles.pop()
+        print(sequence)
         sequence = []
     else:
         sequence = []
-    
-    
 
     jouer1.draw(screen)
     jouer2.draw(screen)
