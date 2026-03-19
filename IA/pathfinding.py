@@ -1,20 +1,12 @@
 import heapq
 
 def heuristic(a, b):
-    """Distance de Manhattan."""
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def astar(grid, start, goal):
-    """
-    grid  : grille 2D (0=libre, 1=mur)
-    start : tuple (x, y) en tiles
-    goal  : tuple (x, y) en tiles
-    Retourne la liste de tuples (x,y) du chemin, ou [] si impossible.
-    """
     rows = len(grid)
     cols = len(grid[0])
 
-    # Vérifications de base
     if not (0 <= start[1] < rows and 0 <= start[0] < cols):
         return []
     if not (0 <= goal[1] < rows and 0 <= goal[0] < cols):
@@ -33,7 +25,6 @@ def astar(grid, start, goal):
         _, current = heapq.heappop(open_set)
 
         if current == goal:
-            # Reconstitue le chemin
             path = []
             while current in came_from:
                 path.append(current)
